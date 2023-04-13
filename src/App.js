@@ -1,7 +1,7 @@
 import './App.css';
 import {BrowserRouter as Router,Routes,Route} from "react-router-dom"
-import PageCrud from './Components/PageCrud'
-import LoginForm from './Components/LoginForm';
+import PageCrud from './components/PageCrud'
+import LoginForm from './components/LoginForm';
 
 
 
