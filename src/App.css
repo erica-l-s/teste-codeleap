@@ -72,6 +72,7 @@
 
 .header{
   display: flex;
+  justify-content: space-between;
   align-items: center;
   background-color: #7695EC;
   height: 40px;
@@ -80,14 +81,27 @@
 
 }
 
+.header button{
+  width: 80px;
+  height: 25px;
+  background: #7695EC;
+  border: none;
+  border-radius: 8px;
+  color: #FFFFFF;
+  text-transform: uppercase;
+  cursor: pointer;
+  margin-top: 2px;
+}
+
 .header p{
+  
   font-size: 16px;
   color: #FFFFFF;
 }
 
 .box{
  height: 40%;
- margin:20px 40px;
+ margin:40px;
  width: 80%;
  border: 1px solid #999999;
  border-radius: 8px;
@@ -102,14 +116,13 @@
 }
 
 .box p{
- 
   display: flex;
   font-size: 12px;
   padding-left: 15px;
 }
 
 .input-title{
-  width: 300px;
+  width: 95%;
   margin: 5px;
   padding: 5px;
 }
@@ -117,7 +130,7 @@
 .input-content{
  
   padding-left: 5px;
-  width: 300px;
+  width: 95%;
   height: 50px;
   margin: 5px;
 }
@@ -129,9 +142,11 @@
   border: none;
   border-radius: 8px;
   color: #FFFFFF;
-  margin-left: 200px;
   text-transform: uppercase;
   cursor: pointer;
   margin-top: 2px;
+}
 
+.box button:disabled{
+  background-color: #777777;
 }

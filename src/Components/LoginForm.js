@@ -1,35 +1,23 @@
-import { useNavigate } from "react-router-dom";
 import { useState } from "react";
+import React from "react";
+import PageCrud from "./PageCrud";
 
 const LoginForm = (user) => {
 
-    const navigate = useNavigate();
     const [login, setLogin] = useState("");
     const [isLogged, setIsLogged] = useState(false)
 
     const onInput = (e) => setLogin(e.target.value);
 
-    const hadleSubmit = (e) => {
-        e.preventDefault()
-       navigate('/crud')
-        
-        const userData = {
-            login
-          };
-          localStorage.setItem("info", JSON.stringify(userData))
+    const hadleSubmit = () => {
+   
+          localStorage.setItem("info", JSON.stringify(login))
           setIsLogged(true)
-          
-    
     }
     
-    const handleLogout = () =>{
-        localStorage.removeItem("info")
-        setIsLogged(false)
-        
-    }
- 
+  
     return (
-            
+          ( isLogged ? <PageCrud/> : 
        <div className="container">
         <form onSubmit={hadleSubmit}>
             <h3>Welcome to CodeLeap network!</h3>
@@ -48,8 +36,8 @@ const LoginForm = (user) => {
         </form>
       
        </div>
-            
-   
+              
+        ) 
     )
     
 }
