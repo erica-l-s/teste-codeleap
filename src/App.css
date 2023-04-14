@@ -91,6 +91,8 @@
   text-transform: uppercase;
   cursor: pointer;
   margin-top: 2px;
+  font-size: 12px;
+  font-weight: 700;
 }
 
 .header p{
