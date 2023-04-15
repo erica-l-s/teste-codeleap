@@ -1,8 +1,9 @@
 *{
   margin: 0;
   padding: 0;
-  box-sizing: border-box;
+  box-sizing:border-box;
 }
+
 .App {
   display: flex;
   justify-content: center;
@@ -64,10 +65,14 @@
 }
 
 .container-crud{
+  position: relative;
   background-color: #FFFFFF;
   height: 80%;
+  overflow: hidden;
+  overflow-y: scroll;
   width: 50%;
   border-radius: 8px;
+ 
 }
 
 .header{
@@ -78,6 +83,8 @@
   height: 40px;
   padding: 15px;
   border-radius: 8px 8px 0 0;
+  font-size: 16px;
+  color: #FFFFFF;
 
 }
 
@@ -95,11 +102,6 @@
   font-weight: 700;
 }
 
-.header p{
-  
-  font-size: 16px;
-  color: #FFFFFF;
-}
 
 .box{
  height: 40%;
@@ -107,7 +109,7 @@
  width: 80%;
  border: 1px solid #999999;
  border-radius: 8px;
-
+ padding-bottom: 20px;
 }
 
 .box h2{
@@ -135,6 +137,7 @@
   width: 95%;
   height: 50px;
   margin: 5px;
+
 }
 
 .box button{
@@ -152,4 +155,12 @@
 .box button:disabled{
   background-color: #777777;
 }
+
+.name-user{
+  display: flex;
+  justify-content: space-between;
+  color:#777777;
+  padding: 10px 0 25px 0px;
+}
+
 

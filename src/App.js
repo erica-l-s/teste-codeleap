@@ -14,7 +14,6 @@ function App() {
     <div className='App'>
       <Router>
       <Routes>
-     
         <Route path={"/"} element={<LoginForm/>}/>
         <Route path={"/create"} element={<Create/>}/>
         <Route path={"/read"} element={<Read/>}/>

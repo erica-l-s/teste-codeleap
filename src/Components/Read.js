@@ -22,7 +22,7 @@ const Read = () =>{
                     return(
                        <div key={post.id} className="box">
                        <div className="header">{post.title}</div>
-                       <div>
+                       <div className="name-user">
                          <p>@{post.username}</p>
                          <p>{post.created_datetime}</p>
                        </div>

@@ -15,8 +15,7 @@ const Create = () => {
     const handlerClick = () => {
         localStorage.clear()
         window.location.reload()
-        
-     
+   
     }
     
     const handleSubmit = async (e) => {

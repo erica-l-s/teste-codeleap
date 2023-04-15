@@ -4,9 +4,9 @@ import Create from "./Create";
 
 
 
-const LoginForm = (user) => {
+const LoginForm = () => {
     
-    const [login, setLogin] = useState("");
+    const [login, setLogin] = useState('');
     const [isLogged, setIsLogged] = useState(false);
     
     const onInput = (e) => setLogin(e.target.value);
@@ -14,7 +14,7 @@ const LoginForm = (user) => {
 
     const hadleSubmit = () => {
    
-          localStorage.setItem("info", JSON.stringify(login))
+          localStorage.setItem('info', JSON.stringify(login))
           setIsLogged(true)
         
           
