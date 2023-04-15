@@ -1,23 +1,28 @@
 import { useState } from "react";
 import React from "react";
-import PageCrud from "./PageCrud";
+import Create from "./Create";
+
+
 
 const LoginForm = (user) => {
-
+    
     const [login, setLogin] = useState("");
-    const [isLogged, setIsLogged] = useState(false)
-
+    const [isLogged, setIsLogged] = useState(false);
+    
     const onInput = (e) => setLogin(e.target.value);
+   
 
     const hadleSubmit = () => {
    
           localStorage.setItem("info", JSON.stringify(login))
           setIsLogged(true)
+        
+          
     }
     
   
     return (
-          ( isLogged ? <PageCrud/> : 
+          ( isLogged ? <Create/> : 
        <div className="container">
         <form onSubmit={hadleSubmit}>
             <h3>Welcome to CodeLeap network!</h3>
