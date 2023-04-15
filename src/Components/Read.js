@@ -10,25 +10,25 @@ const Read = () =>{
     useEffect(() => {
         axios.get(url)
             .then((response) => {
-                setGetItem(console.log(response.data.results))
+                setGetItem(response.data.results)
             })
     }, [])
 
     return(
         <div className="post">
 
-            olaaaa
-            <div>
+              <div>
                 {getItem && getItem.map((post)=>{
                     return(
-                        <div key={post.id}>
+                       <div key={post.id} className="box">
+                       <div className="header">{post.title}</div>
+                       <div>
+                         <p>@{post.username}</p>
+                         <p>{post.created_datetime}</p>
+                       </div>
+                       <div>{post.content}</div>
 
-                          
-                        <ul>
-                            <li>{post.title}</li>
-                        </ul>
-                          
-                        </div>
+                       </div>
                     )
                 })}
             </div>
