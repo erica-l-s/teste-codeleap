@@ -27,9 +27,11 @@ const Read = () =>{
                        <div className="header">{post.title}</div>
                        <div className="name-user">
                          <p>@{post.username}</p>
-                         <p>{(currentDate - new Date(post.created_datetime).toLocaleTimeString('pt-BR'))}</p>
+                         <p>{new Date(post.created_datetime).toLocaleTimeString('pt-BR')}</p>
                        </div>
-                       <div>{post.content}</div>
+                       <div className="content">
+                        <p>{post.content}</p>
+                        </div>
 
                        </div>
                     )

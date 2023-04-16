@@ -14,7 +14,7 @@ const LoginForm = () => {
 
     const hadleSubmit = () => {
    
-          localStorage.setItem('info', JSON.stringify(login))
+          localStorage.setItem('info', JSON.stringify(login).replace(/"/g, ''))
           setIsLogged(true)
         
           
