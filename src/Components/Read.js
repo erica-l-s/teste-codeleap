@@ -14,7 +14,10 @@ const Read = () =>{
             })
     }, [])
 
-    return(
+    const currentDate = new Date().toLocaleTimeString('pt-BR')
+    console.log(currentDate)
+  
+     return(
         <div className="post">
 
               <div>
@@ -24,7 +27,7 @@ const Read = () =>{
                        <div className="header">{post.title}</div>
                        <div className="name-user">
                          <p>@{post.username}</p>
-                         <p>{post.created_datetime}</p>
+                         <p>{(currentDate - new Date(post.created_datetime).toLocaleTimeString('pt-BR'))}</p>
                        </div>
                        <div>{post.content}</div>
 

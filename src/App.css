@@ -65,7 +65,6 @@
 }
 
 .container-crud{
-  position: relative;
   background-color: #FFFFFF;
   height: 80%;
   overflow: hidden;
@@ -160,7 +159,16 @@
   display: flex;
   justify-content: space-between;
   color:#777777;
-  padding: 10px 0 25px 0px;
+  padding: 10px 5px 25px 0;
+  overflow: hidden;
+  word-break: break-all;
+  
 }
+
+.name-user p{
+  
+  margin-right: 50px;
+}
+
 
 
