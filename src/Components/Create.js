@@ -5,6 +5,7 @@ import Read from "./Read";
 
 
 
+
 const Create = () => {
     const [title, setTitle] = useState('')
     const [content, setContent] = useState('')
@@ -12,6 +13,7 @@ const Create = () => {
     const [getItem,setGetItem] = useState([])
     
     const onInput = (e) => setTitle(e.target.value);
+    
     const handlerClick = () => {
         localStorage.clear()
         window.location.reload()
@@ -39,12 +41,13 @@ const Create = () => {
     useEffect(() => {
         axios.get("https://dev.codeleap.co.uk/careers/")
             .then((response) => {
-                setGetItem(console.log(response.data.results))
+                setGetItem(response.data.results)
             })
     }, [])
   
     return (
         <div className="container-crud">
+           
             <div className="header">
                 <p>CodeLeap Network</p>
                 <button onClick={handlerClick}>Logout</button>
@@ -76,8 +79,7 @@ const Create = () => {
             <div>
              <Read/>
             </div>
-           
-        </div>
+         </div>
 
     )
 

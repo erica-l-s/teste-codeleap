@@ -16,8 +16,7 @@ const LoginForm = () => {
    
           localStorage.setItem('info', JSON.stringify(login).replace(/"/g, ''))
           setIsLogged(true)
-        
-          
+              
     }
     
   
@@ -36,8 +35,6 @@ const LoginForm = () => {
             <button
                 disabled={!login}
             >Enter</button>
-
-
         </form>
       
        </div>
