@@ -4,14 +4,11 @@ import axios from "axios";
 import Read from "./Read";
 
 
-
-
 const Create = () => {
     const [title, setTitle] = useState('')
     const [content, setContent] = useState('')
     const [username, setUsername] = useState(localStorage.getItem('info'))
-    const [getItem,setGetItem] = useState([])
-    
+       
     const onInput = (e) => setTitle(e.target.value);
     
     const handlerClick = () => {
@@ -23,13 +20,13 @@ const Create = () => {
     const handleSubmit = async (e) => {
         e.preventDefault()
         try {
-            const response = await axios.post("https://dev.codeleap.co.uk/careers/",
+            await axios.post("https://dev.codeleap.co.uk/careers/",
                 {
                     username,
                     title,
                     content
                 })
-            console.log(response.data)
+            
             setTitle('')
             setContent('')
             setUsername('')
@@ -38,14 +35,7 @@ const Create = () => {
         }
     }
 
-    useEffect(() => {
-        axios.get("https://dev.codeleap.co.uk/careers/")
-            .then((response) => {
-                setGetItem(response.data.results)
-            })
-    }, [])
-  
-    return (
+     return (
         <div className="container-crud">
            
             <div className="header">

@@ -4,49 +4,56 @@ import { useState,useEffect } from "react";
 import { FaEdit,FaTrash } from "react-icons/fa";
 
 
-
-
 const Read = () =>{
     const [getItem, setGetItem] = useState([])
     const [update, setUpdate] = useState([])
+    const [title, setTitle] = useState("")
+    const [content, setContent] = useState("")
     
 
     const url = "https://dev.codeleap.co.uk/careers/"
 
-    useEffect(() => {
-        axios.get(url)
+    const getData = async () => {
+        await axios.get(url)
             .then((response) => {
                 setGetItem(response.data.results)
+                
             })
-    }, [])
+    }
 
- 
-    const handlerEdit = (id) =>{
-        axios.patch(`https://dev.codeleap.co.uk/careers/${id}/`)
+     const handlerEdit = (id) =>{
+       axios.patch(`${url}/${id}/`,{
+        title:title,
+        content:content
+       })
         .then(()=>{
-            setUpdate(id)
+            console.log(setUpdate(id))
         })
     } 
     
-    const handlerDelete = (id) =>{
-     axios.delete(`https://dev.codeleap.co.uk/careers/${id}/`)
-     .then(()=>{
-        setGetItem()
-     })
-    }
-         
+    const handlerDelete = async (id) =>{
+           await axios.delete(`${url}/${id}/`)
+            .then(()=>{
+             getData()
+           })
+   
+     }
+
+     useEffect(()=>{
+        getData()
+     },[getItem])
+
      return(
         <div className="post">
 
               <div>
-                {getItem && getItem.map((post,i)=>{
-                     
-                        return(  
-                        <div key={i} className="box">
+                {getItem && getItem.map((post)=>{
+                                              return(
+                        <div key={post.id} className="box">
                         <div className="header">
                          {post.title}
                          <button onClick={()=> handlerEdit(post.id)}><FaEdit/></button>
-                         <button onClick={()=> handlerDelete(post.id)}><FaTrash/></button>
+                         <button onClick={()=> {if(window.confirm("Are you sure you want to delete this item?")){handlerDelete(post.id)}}}><FaTrash/></button>
                          </div>
                         <div className="name-user">
                           <p>@{post.username}</p>
@@ -56,12 +63,11 @@ const Read = () =>{
                          <p>{post.content}</p>
                          </div>
                       </div>
-                    )
+                          )   
                 })}
             </div>
         </div>
     )
-
 }
 
 export default Read
