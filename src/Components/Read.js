@@ -9,7 +9,7 @@ const Read = () =>{
     const [update, setUpdate] = useState([])
     const [title, setTitle] = useState("")
     const [content, setContent] = useState("")
-    
+       
 
     const url = "https://dev.codeleap.co.uk/careers/"
 
@@ -21,19 +21,21 @@ const Read = () =>{
             })
     }
 
-     const handlerEdit = (id) =>{
-       axios.patch(`${url}/${id}/`,{
+     const handlerEdit = async (id) =>{
+       await axios.patch(`${url}${id}/`,{
         title:title,
         content:content
        })
-        .then(()=>{
-            console.log(setUpdate(id))
-        })
-    } 
-    
+       .then(()=>{
+
+       })
+    }
+        
+       
     const handlerDelete = async (id) =>{
            await axios.delete(`${url}/${id}/`)
             .then(()=>{
+                if(window.confirm("Are you sure you want to delete this item?"))
              getData()
            })
    
@@ -53,7 +55,7 @@ const Read = () =>{
                         <div className="header">
                          {post.title}
                          <button onClick={()=> handlerEdit(post.id)}><FaEdit/></button>
-                         <button onClick={()=> {if(window.confirm("Are you sure you want to delete this item?")){handlerDelete(post.id)}}}><FaTrash/></button>
+                         <button onClick={()=> handlerDelete(post.id)}><FaTrash/></button>
                          </div>
                         <div className="name-user">
                           <p>@{post.username}</p>
@@ -63,7 +65,7 @@ const Read = () =>{
                          <p>{post.content}</p>
                          </div>
                       </div>
-                          )   
+                )   
                 })}
             </div>
         </div>

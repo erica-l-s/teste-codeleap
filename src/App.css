@@ -19,8 +19,8 @@
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  width: 500px;
-  height: 205px;
+  width: 30rem;
+  height: 15rem;
   background: #FFFFFF;
   border: 1px solid #CCCCCC;
   border-radius: 16px;
@@ -37,18 +37,17 @@
   font-size: 16px;
   font-weight: 400;
   padding: 15px;
+  
 }
 
 .container input{
-  width: 300px;
-  height: 32px;
-  margin-left: 80px;
+  height: 2rem;
   border: 1px solid #777777;
   border-radius: 8px;
   padding: 5px;
 }
 
-.container button{
+ button{
   width: 100px;
   height: 32px;
   background: #7695EC;
@@ -59,18 +58,18 @@
   text-transform: uppercase;
   cursor: pointer;
 }
-.container button:disabled{
+ button:disabled{
   background-color: #777777;
   cursor:not-allowed;
 }
 
 .container-crud{
+  height: 100%;
   background-color: #FFFFFF;
-  height: 80%;
   overflow: hidden;
   overflow-y: scroll;
-  width: 50%;
   border-radius: 8px;
+  word-break: break-all;
  
 }
 
@@ -81,26 +80,10 @@
   background-color: #7695EC;
   height: 40px;
   padding: 15px;
-  border-radius: 8px 8px 0 0;
   font-size: 16px;
   color: #FFFFFF;
   
 }
-
-.header button{
-  width: 80px;
-  height: 25px;
-  background: #7695EC;
-  border: none;
-  border-radius: 8px;
-  color: #FFFFFF;
-  text-transform: uppercase;
-  cursor: pointer;
-  margin-top: 2px;
-  font-size: 12px;
-  font-weight: 700;
-}
-
 
 .box{
  height: 40%;
@@ -139,21 +122,6 @@
 
 }
 
-.box button{
-  width: 80px;
-  height: 25px;
-  background: #7695EC;
-  border: none;
-  border-radius: 8px;
-  color: #FFFFFF;
-  text-transform: uppercase;
-  cursor: pointer;
-  margin-top: 2px;
-}
-
-.box button:disabled{
-  background-color: #777777;
-}
 
 .name-user{
   display: flex;
