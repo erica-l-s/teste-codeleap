@@ -6,10 +6,7 @@ import { FaEdit,FaTrash } from "react-icons/fa";
 
 const Read = () =>{
     const [getItem, setGetItem] = useState([])
-    const [update, setUpdate] = useState([])
-    const [title, setTitle] = useState("")
-    const [content, setContent] = useState("")
-       
+        
 
     const url = "https://dev.codeleap.co.uk/careers/"
 
@@ -21,18 +18,39 @@ const Read = () =>{
             })
     }
 
-     const handlerEdit = async (id) =>{
-       await axios.patch(`${url}${id}/`,{
-        title:title,
-        content:content
-       })
-       .then(()=>{
-
-       })
-    }
-        
+    //  const handlerEdit = async (id) =>{
+    //    await axios.patch(`${url}${id}/`,{
+    //     username,
+    //     title,
+    //     content
+    //    })
+    //    .then((response)=>{
+    //     setTitle(...getItem,response.data)
+    //     setContent(...getItem,response.data)
+    //    })
        
-    const handlerDelete = async (id) =>{
+    // }
+    const handleEdit = async (id) => {
+      
+      try {
+       const response = await axios.patch(`${url}${id}/`,
+              {
+                 getItem:id.username
+              })
+              console.log(response.data)
+              
+         setGetItem('')
+
+      //  if(isOpen){
+
+      //  }          
+      } catch (err) {
+          console.error(err)
+      }
+      
+  }
+      
+    const handleDelete = async (id) =>{
            await axios.delete(`${url}/${id}/`)
             .then(()=>{
                 if(window.confirm("Are you sure you want to delete this item?"))
@@ -44,7 +62,7 @@ const Read = () =>{
      useEffect(()=>{
         getData()
      },[getItem])
-
+     
      return(
         <div className="post">
 
@@ -54,8 +72,8 @@ const Read = () =>{
                         <div key={post.id} className="box">
                         <div className="header">
                          {post.title}
-                         <button onClick={()=> handlerEdit(post.id)}><FaEdit/></button>
-                         <button onClick={()=> handlerDelete(post.id)}><FaTrash/></button>
+                         <button onClick={()=> handleEdit(post.id)}><FaEdit/></button>
+                         <button onClick={()=> handleDelete(post.id)}><FaTrash/></button>
                          </div>
                         <div className="name-user">
                           <p>@{post.username}</p>

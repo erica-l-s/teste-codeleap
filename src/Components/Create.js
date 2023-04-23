@@ -20,19 +20,20 @@ const Create = () => {
     const handleSubmit = async (e) => {
         e.preventDefault()
         try {
-            await axios.post("https://dev.codeleap.co.uk/careers/",
+        const response = await axios.post("https://dev.codeleap.co.uk/careers/",
                 {
                     username,
                     title,
                     content
                 })
-            
+                console.log(response.data)  
             setTitle('')
             setContent('')
             setUsername('')
         } catch (err) {
             console.error(err)
         }
+        
     }
 
      return (

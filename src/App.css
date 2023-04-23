@@ -82,6 +82,7 @@
   padding: 15px;
   font-size: 16px;
   color: #FFFFFF;
+  border-radius: 7px 7px 0 0;
   
 }
 
@@ -107,10 +108,15 @@
   padding-left: 15px;
 }
 
+input{
+ outline-color: #7695EC;
+}
+
 .input-title{
   width: 95%;
   margin: 5px;
   padding: 5px;
+
 }
 
 .input-content{
@@ -119,6 +125,7 @@
   width: 95%;
   height: 50px;
   margin: 5px;
+ 
 
 }
 
