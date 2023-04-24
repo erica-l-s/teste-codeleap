@@ -19,18 +19,28 @@ const Read = () => {
 
       })
   }
- const handleSubmit = (newPost)=>{
- setGetItem([...getItem,newPost])
- }
-  const handleEdit = async (id) => {
- 
-      await axios.patch(`${url}${id}/`)
-           
-      setUpdate(id)
-      setOpenModal(true)
-      console.log(id)
+
+
+  const handleSubmit = (newPost) => {
+    update === null
+      ? setGetItem([...getItem, newPost])
+      : setGetItem(
+        getItem.map((curr, id) => {
+          if (id !== update) return curr
+          return newPost
+        })
+      )
   }
+  const handleEdit = async (id) => {
   
+    await axios.patch(`${url}${id}/`)
+   
+    setUpdate(id)
+    setOpenModal(true)
+    console.log(id)
+    
+  }
+
   const handleDelete = async (id) => {
     await axios.delete(`${url}/${id}/`)
       .then(() => {
@@ -45,20 +55,24 @@ const Read = () => {
 
   return (
     <div className="post">
-    
+
       <div>
-        {openModal && <Modal 
-        closeModal={()=>{setOpenModal(false)}}
-        onSubmit={handleSubmit}
-        defaultValue = {update !== null && getItem(update) }
-        />}
+
         {getItem && getItem.map((post) => {
           return (
             <div key={post.id} className="box">
               <div className="header">
                 {post.title}
                 <button className="openModal" onClick={() => handleEdit(post.id)}><FaEdit /></button>
-               
+                {openModal && <Modal
+                  closeModal={() => 
+                    {setOpenModal(false) 
+                     setUpdate(null)
+                    }}
+                  onSubmit={handleSubmit}
+                  defaultValue={update !== null && getItem[update]}
+                  
+                />}
                 <button onClick={() => handleDelete(post.id)}><FaTrash /></button>
               </div>
               <div className="name-user">
