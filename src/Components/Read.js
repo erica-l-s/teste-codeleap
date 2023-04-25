@@ -5,6 +5,7 @@ import { FaEdit, FaTrash } from "react-icons/fa";
 import Modal from "./Modal";
 
 
+
 const Read = () => {
   const [getItem, setGetItem] = useState([])
   const [update, setUpdate] = useState(null)
@@ -16,30 +17,40 @@ const Read = () => {
     await axios.get(url)
       .then((response) => {
         setGetItem(response.data.results)
-
       })
   }
 
+  // const handleSubmit = (newPost) => {
+  //   update === null
+  //     ? setGetItem([...getItem, newPost])
+  //     : setGetItem(
+  //       getItem.map((curr, id) => {
+  //         if (id !== update) return curr
+  //         return newPost
+  //       })
+  //      )
+  // }
 
-  const handleSubmit = (newPost) => {
-    update === null
-      ? setGetItem([...getItem, newPost])
-      : setGetItem(
-        getItem.map((curr, id) => {
-          if (id !== update) return curr
-          return newPost
-        })
-      )
-  }
-  const handleEdit = async (id) => {
-  
-    await axios.patch(`${url}${id}/`)
-   
-    setUpdate(id)
-    setOpenModal(true)
-    console.log(id)
+  // const handleEdit = async (id) => {
+  //     await axios.patch(`${url}${id}/`)
+  //       setUpdate(id)
+  //       setOpenModal(true)
+  //       console.log(id)
     
-  }
+  // }
+  const handleSubmitEdit = async (id) => {
+    try {
+    const response = await axios.patch(`${url}${id}/`,...getItem
+           )
+       console.log(response.data)  
+       setUpdate(response.data)
+       setOpenModal(true)
+       
+    } catch (err) {
+        console.error(err)
+    }
+    
+}
 
   const handleDelete = async (id) => {
     await axios.delete(`${url}/${id}/`)
@@ -57,19 +68,19 @@ const Read = () => {
     <div className="post">
 
       <div>
-
+        
         {getItem && getItem.map((post) => {
           return (
             <div key={post.id} className="box">
               <div className="header">
                 {post.title}
-                <button className="openModal" onClick={() => handleEdit(post.id)}><FaEdit /></button>
+                <button className="openModal" onClick={() => handleSubmitEdit(post.id)}><FaEdit /></button>
                 {openModal && <Modal
-                  closeModal={() => 
+                    closeModal={() => 
                     {setOpenModal(false) 
                      setUpdate(null)
                     }}
-                  onSubmit={handleSubmit}
+                  onSubmit={handleSubmitEdit}
                   defaultValue={update !== null && getItem[update]}
                   
                 />}
@@ -84,9 +95,9 @@ const Read = () => {
               </div>
             </div>
           )
-
+          
         })}
-
+ 
       </div>
     </div>
   )

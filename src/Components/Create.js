@@ -4,6 +4,7 @@ import axios from "axios";
 import Read from "./Read";
 
 
+
 const Create = () => {
     const [title, setTitle] = useState('')
     const [content, setContent] = useState('')
@@ -69,7 +70,7 @@ const Create = () => {
             </form>
             <div>
              <Read/>
-            </div>
+           </div>
          </div>
 
     )
