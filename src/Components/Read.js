@@ -5,7 +5,6 @@ import { FaEdit, FaTrash } from "react-icons/fa";
 import Modal from "./Modal";
 
 
-
 const Read = () => {
   const [getItem, setGetItem] = useState([])
   const [update, setUpdate] = useState(null)
@@ -13,77 +12,72 @@ const Read = () => {
 
   const url = "https://dev.codeleap.co.uk/careers/"
 
+
   const getData = async () => {
     await axios.get(url)
       .then((response) => {
         setGetItem(response.data.results)
+
       })
   }
 
-  // const handleSubmit = (newPost) => {
-  //   update === null
-  //     ? setGetItem([...getItem, newPost])
-  //     : setGetItem(
-  //       getItem.map((curr, id) => {
-  //         if (id !== update) return curr
-  //         return newPost
-  //       })
-  //      )
-  // }
-
-  // const handleEdit = async (id) => {
-  //     await axios.patch(`${url}${id}/`)
-  //       setUpdate(id)
-  //       setOpenModal(true)
-  //       console.log(id)
-    
-  // }
   const handleSubmitEdit = async (id) => {
     try {
-    const response = await axios.patch(`${url}${id}/`,...getItem
-           )
-       console.log(response.data)  
-       setUpdate(response.data)
-       setOpenModal(true)
-       
+      const response = await axios.patch(`${url}${id}/`,
+        {
+          title: id.title,
+          content: id.content
+        }
+      )
+      console.log(response.data)
+      setUpdate(response.data)
+      setOpenModal(true)
+
+
     } catch (err) {
-        console.error(err)
+      console.error(err)
     }
-    
-}
+
+  }
 
   const handleDelete = async (id) => {
-    await axios.delete(`${url}/${id}/`)
-      .then(() => {
-        if (window.confirm("Are you sure you want to delete this item?"))
+    if (window.confirm("Are you sure you want to delete this item?")) {
+      await axios.delete(`${url}${id}/`)
+        .then(() => {
+
           getData()
-      })
+        })
+    }
   }
 
   useEffect(() => {
     getData()
+
   }, [getItem])
 
   return (
     <div className="post">
 
       <div>
-        
+
         {getItem && getItem.map((post) => {
           return (
             <div key={post.id} className="box">
               <div className="header">
                 {post.title}
-                <button className="openModal" onClick={() => handleSubmitEdit(post.id)}><FaEdit /></button>
+                <button className="openModal" onClick={() => { handleSubmitEdit(post.id) }}><FaEdit /></button>
+
                 {openModal && <Modal
-                    closeModal={() => 
-                    {setOpenModal(false) 
-                     setUpdate(null)
-                    }}
+                  closeModal={() => {
+                    setOpenModal(false)
+                    setUpdate(null)
+
+                  }}
                   onSubmit={handleSubmitEdit}
                   defaultValue={update !== null && getItem[update]}
-                  
+
                 />}
+
                 <button onClick={() => handleDelete(post.id)}><FaTrash /></button>
               </div>
               <div className="name-user">
@@ -95,9 +89,9 @@ const Read = () => {
               </div>
             </div>
           )
-          
+
         })}
- 
+
       </div>
     </div>
   )

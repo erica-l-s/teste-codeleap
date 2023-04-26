@@ -1,6 +1,7 @@
 import { useState } from "react";
 import React from "react";
 import Create from "./Create";
+import { useNavigate } from "react-router-dom";
 
 
 
@@ -10,12 +11,13 @@ const LoginForm = () => {
     const [isLogged, setIsLogged] = useState(false);
     
     const onInput = (e) => setLogin(e.target.value);
-   
+    const navigate = useNavigate()
 
     const hadleSubmit = () => {
    
           localStorage.setItem('info', JSON.stringify(login).replace(/"/g, ''))
           setIsLogged(true)
+          navigate('/create')
               
     }
     
