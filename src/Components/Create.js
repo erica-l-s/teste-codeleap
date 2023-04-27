@@ -1,4 +1,4 @@
-import { useEffect, useState} from "react";
+import {useState} from "react";
 import React from "react";
 import axios from "axios";
 import Read from "./Read";
@@ -17,7 +17,7 @@ const Create = () => {
         navigate('/')
     }
     
-    const handleSubmit = async (e) => {
+    const handleSubmitAdd = async (e) => {
         e.preventDefault()
         try {
         const response = await axios.post("https://dev.codeleap.co.uk/careers/",
@@ -42,7 +42,7 @@ const Create = () => {
                 <p>CodeLeap Network</p>
                 <button onClick={handlerClick}>Logout</button>
             </div>
-            <form className="box" onSubmit={handleSubmit}>
+            <form className="box" onSubmit={handleSubmitAdd}>
                 <h2>What's on your mind?</h2>
 
                 <div>
@@ -64,6 +64,7 @@ const Create = () => {
                 </div>
                 <button
                     disabled={!content}
+                    onClick={handleSubmitAdd}
                 >Create</button>
             </form>
             <div>

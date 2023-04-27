@@ -3,12 +3,15 @@ import axios from "axios";
 import { useState, useEffect } from "react";
 import { FaEdit, FaTrash } from "react-icons/fa";
 import Modal from "./Modal";
-
+import { Link } from "react-router-dom";
 
 const Read = () => {
+  const [title, setTitle] = useState('')
+  const [content, setContent] = useState('')
   const [getItem, setGetItem] = useState([])
   const [update, setUpdate] = useState(null)
   const [openModal, setOpenModal] = useState(false)
+ 
 
   const url = "https://dev.codeleap.co.uk/careers/"
 
@@ -21,25 +24,33 @@ const Read = () => {
       })
   }
 
-  const handleSubmitEdit = async (id) => {
-    try {
-      const response = await axios.patch(`${url}${id}/`,
-        {
-          title: id.title,
-          content: id.content
-        }
-      )
-      console.log(response.data)
-      setUpdate(response.data)
-      setOpenModal(true)
+  // const handleSubmitEdit = async (id) => {
+ 
+  //   try {
+  //     const response = await axios.patch(`${url}${id}/`,
+  //       {
+  //         title:title.id,
+  //         content:content.id
+  //       }
+  //     )
+  //     console.log(response.data)
+  //     setUpdate(response.data)
+  //     setOpenModal(true)
+  //     setTitle('')
+  //     setContent('')
+  //   } catch (err) {
+  //     console.error(err)
+  //   }
+  // }
 
-
-    } catch (err) {
-      console.error(err)
-    }
+  const setData = (post) =>{
+    let {id,title,content} = post
+    localStorage.setItem('ID',id)
+    localStorage.setItem('title',title)
+    localStorage.setItem('content',content)
 
   }
-
+ 
   const handleDelete = async (id) => {
     if (window.confirm("Are you sure you want to delete this item?")) {
       await axios.delete(`${url}${id}/`)
@@ -65,18 +76,18 @@ const Read = () => {
             <div key={post.id} className="box">
               <div className="header">
                 {post.title}
-                <button className="openModal" onClick={() => { handleSubmitEdit(post.id) }}><FaEdit /></button>
+                <Link to='/update'><button className="openModal" onClick={() => setData(post)}><FaEdit /></button></Link>
 
-                {openModal && <Modal
+                {/* {openModal && <Modal
                   closeModal={() => {
-                    setOpenModal(false)
-                    setUpdate(null)
+                  setOpenModal(false)
+                  setUpdate(null)
 
                   }}
-                  onSubmit={handleSubmitEdit}
+                  onSubmit={handleSubmit}
                   defaultValue={update !== null && getItem[update]}
 
-                />}
+                />} */}
 
                 <button onClick={() => handleDelete(post.id)}><FaTrash /></button>
               </div>
@@ -89,7 +100,6 @@ const Read = () => {
               </div>
             </div>
           )
-
         })}
 
       </div>
