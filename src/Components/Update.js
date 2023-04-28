@@ -1,11 +1,13 @@
 import axios from 'axios';
 import React, { useEffect, useState } from 'react'
+import { useNavigate } from 'react-router-dom';
 
-const Update = () => {
+const Update = ({onRequestClose}) => {
     const [id, setID] = useState([]);
     const [title, setTitle] = useState('');
     const [content, setContent] = useState('');
-
+   
+    const navigate = useNavigate()
 
     useEffect(() => {
         setID(localStorage.getItem('ID'))
@@ -27,21 +29,18 @@ const Update = () => {
             setTitle('')
             setContent('')
             setID('')
-
-        } catch (err) {
+            onRequestClose()
+            
+         } catch (err) {
             console.error(err)
         }
     }
     return (
-        <div className="container-crud">
-
-            <div className="header">
-
-            </div>
-            <form className="box" onSubmit={handleSubmitEdit}>
+       
+            <form className="modalBackground">
                 <h2>Edit</h2>
 
-                <div>
+                <div className='modalContainer'>
                     <p>Title</p>
                     <input
                         value={title}
@@ -59,17 +58,15 @@ const Update = () => {
                 </div>
 
                 <button
-                    disabled={!content}
-                    onClick={handleSubmitEdit}
-
+                   onClick={handleSubmitEdit}
+                         
                 >Update</button>
+                <button onClick={()=> navigate('/create')}>Close</button>
 
 
             </form>
-            <div>
-
-            </div>
-        </div>
+           
+        
     )
 }
 

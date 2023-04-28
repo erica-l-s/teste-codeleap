@@ -1,5 +1,5 @@
 import './App.css';
-import {BrowserRouter as Router,Routes,Route} from "react-router-dom"
+import { BrowserRouter as Router,Routes,Route} from "react-router-dom"
 import Create from './components/Create'
 import LoginForm from './components/LoginForm';
 import Update from './components/Update'
@@ -16,8 +16,7 @@ function App() {
         <Route path={"read"} element={<Read/>}/>
         <Route path={"/update"} element={<Update/>}/>
         </Routes>
-      </Router>
-      
+     </Router>
     </div>
   );
 }
