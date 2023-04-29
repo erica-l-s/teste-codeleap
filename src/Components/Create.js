@@ -1,5 +1,4 @@
-import {useState} from "react";
-import React from "react";
+import React, { useEffect, useState } from "react";
 import axios from "axios";
 import Read from "./Read";
 import { useNavigate } from "react-router-dom";
@@ -7,37 +6,38 @@ import { useNavigate } from "react-router-dom";
 const Create = () => {
     const [title, setTitle] = useState('')
     const [content, setContent] = useState('')
-    const [username, setUsername] = useState(localStorage.getItem('info'))
-       
+    const [username, setUsername] = useState(localStorage.getItem('user'))
+
     const onInput = (e) => setTitle(e.target.value);
     const navigate = useNavigate()
-    
+
     const handlerClick = () => {
         localStorage.clear()
         navigate('/')
     }
-    
-    const handleSubmitAdd = async (e) => {
-        e.preventDefault()
+
+    const handleSubmitAdd = async () => {
+       
         try {
-        const response = await axios.post("https://dev.codeleap.co.uk/careers/",
+            const response = await axios.post("https://dev.codeleap.co.uk/careers/",
                 {
                     username,
                     title,
                     content
                 })
-                console.log(response.data)  
+            console.log(response.data)
             setTitle('')
             setContent('')
             setUsername('')
         } catch (err) {
             console.error(err)
-       }
+        }
     }
 
-     return (
+   
+    return (
         <div className="container-crud">
-           
+
             <div className="header">
                 <p>CodeLeap Network</p>
                 <button onClick={handlerClick}>Logout</button>
@@ -68,9 +68,9 @@ const Create = () => {
                 >Create</button>
             </form>
             <div>
-             <Read/>
-           </div>
-         </div>
+                <Read />
+            </div>
+        </div>
 
     )
 

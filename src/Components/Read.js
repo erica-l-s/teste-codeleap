@@ -6,79 +6,86 @@ import Modal from "react-modal";
 import Update from "./Update";
 import Delete from "./Delete";
 
-
 Modal.setAppElement('#root')
 
 const Read = () => {
- 
   const [getItem, setGetItem] = useState([])
   const [openModal, setOpenModal] = useState(false)
-  
+  // const [isOpen, setIsOpen] = useState(false)
+
   const url = "https://dev.codeleap.co.uk/careers/"
-  
+
   const getData = async () => {
     await axios.get(url)
-    .then((response) => {
-      setGetItem(response.data.results)
-    })
-  }
-  
-  const isOpenModal = () =>{
-  setOpenModal(true)
+      .then((response) => {
+        setGetItem(response.data.results)
+      })
   }
 
-  const closeModal = () =>{
+  const isOpenModal = () => {
+    setOpenModal(true)
+
+  }
+
+  const closeModal = () => {
     setOpenModal(false)
+
   }
-  
-  const setData = (post) =>{
-    let {id,title,content} = post
-    localStorage.setItem('ID',id)
-    localStorage.setItem('title',title)
-    localStorage.setItem('content',content)
+
+  const setData = (post) => {
+    let { id, title, content } = post
+    localStorage.setItem('ID', id)
+    localStorage.setItem('title', title)
+    localStorage.setItem('content', content)
     isOpenModal()
+
   }
-  
+
   const handleDelete = async (id) => {
+    if (window.confirm("Are you sure want to delete this item?")) {
       await axios.delete(`${url}${id}/`)
         .then(() => {
           getData()
-               
-        
+
         })
-   
     }
-    
-    useEffect(() => {
-      getData()
-    }, [getItem])
+ }
+
+  // const handleClickDelete = () => {
+  //   setIsOpen(!isOpen)
+  // }
+
+  useEffect(() => {
+    getData()
+  }, [getItem])
 
 
-    return (
-      <div className="post">
+  return (
+    <div className="post">
       <div>
         {getItem && getItem.map((post) => {
           return (
             <div key={post.id} className="box">
-              <div className="header">
+              <div className="header-create">
                 {post.title}
-             <div className ="btnModal">
-             <button className="btnModal-open" onClick={() => setData(post)}><FaEdit/></button>
-                {openModal && <Update
-                  isOpen = {openModal}
-                  onRequestClose = {closeModal}
-                />}
+                <div className="btnModal">
+                  {post.username === localStorage.getItem('user') ? <button className="btnModal-open" onClick={() => setData(post)}><FaEdit /></button>  : null} 
+                  {openModal && <Update
+                    isOpen={openModal}
+                    onRequestClose={closeModal}
+                    />}
 
-              <button className="btnModal-close" onClick={() => handleDelete(post.id)}><FaTrash /></button>
-               <Delete
-             
-               message={"Are you sure you want to delete this item?"}
-               onClose={closeModal}
-               />
-               
-              </div>    
-             
-             </div>
+                    {post.username === localStorage.getItem('user') ?  <button className="btnModal-close" onClick={() =>handleDelete(post.id) }><FaTrash /></button> : null}
+                  
+                  {/* {isOpen && <Delete
+                    handleOpen={isOpen}
+                    handleClose={handleClickDelete()}
+                    message={"Are you sure you want to delete this item?"}
+                  />} */}
+
+                </div>
+
+              </div>
               <div className="name-user">
                 <p>@{post.username}</p>
                 <p>{new Date(post.created_datetime).toLocaleTimeString('pt-BR')}</p>
