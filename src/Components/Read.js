@@ -4,6 +4,7 @@ import { useState, useEffect } from "react";
 import { FaEdit, FaTrash } from "react-icons/fa";
 import Modal from "react-modal";
 import Update from "./Update";
+import Delete from "./Delete";
 
 
 Modal.setAppElement('#root')
@@ -28,7 +29,7 @@ const Read = () => {
 
   const closeModal = () =>{
     setOpenModal(false)
-   }
+  }
   
   const setData = (post) =>{
     let {id,title,content} = post
@@ -52,33 +53,29 @@ const Read = () => {
     }, [getItem])
 
 
-
-
     return (
       <div className="post">
-
       <div>
-
         {getItem && getItem.map((post) => {
           return (
             <div key={post.id} className="box">
               <div className="header">
                 {post.title}
-               
-               <button className="openModal" onClick={() => setData(post)}><FaEdit/></button>
+             <div className ="btnModal">
+             <button className="btnModal-open" onClick={() => setData(post)}><FaEdit/></button>
                 {openModal && <Update
                   isOpen = {openModal}
                   onRequestClose = {closeModal}
                 />}
 
-                <button onClick={() => handleDelete(post.id)}><FaTrash /></button>
-              <div
-               isOpen={openModal}
-               title="Delete Item"
-               description="Are you sure you want to delete this item?"
-               onConfirm= {handleDelete}
-              />
-              </div>
+              <button className="btnModal-close" onClick={() => handleDelete(post.id)}><FaTrash /></button>
+               <Delete
+               message={"Are you sure you want to delete this item?"}
+               />
+          
+              </div>    
+             
+             </div>
               <div className="name-user">
                 <p>@{post.username}</p>
                 <p>{new Date(post.created_datetime).toLocaleTimeString('pt-BR')}</p>
@@ -96,21 +93,3 @@ const Read = () => {
 }
 
 export default Read
-// const handleSubmitEdit = async (id) => {
-
-//   try {
-//     const response = await axios.patch(`${url}${id}/`,
-//       {
-//         title:title.id,
-//         content:content.id
-//       }
-//     )
-//     console.log(response.data)
-//     setUpdate(response.data)
-//     setOpenModal(true)
-//     setTitle('')
-//     setContent('')
-//   } catch (err) {
-//     console.error(err)
-//   }
-// }

@@ -1,14 +1,12 @@
 import axios from 'axios';
 import React, { useEffect, useState } from 'react'
-import { useNavigate } from 'react-router-dom';
 
 const Update = ({onRequestClose}) => {
     const [id, setID] = useState([]);
     const [title, setTitle] = useState('');
     const [content, setContent] = useState('');
    
-    const navigate = useNavigate()
-
+   
     useEffect(() => {
         setID(localStorage.getItem('ID'))
         setTitle(localStorage.getItem('title'));
@@ -61,7 +59,7 @@ const Update = ({onRequestClose}) => {
                 className='btnUpdate'
                 onClick={handleSubmitEdit}
                 >Save</button>
-                <button className='btnClose' onClick={()=> navigate('/create')}>Cancel</button>
+                <button className='btnClose' onClick={onRequestClose}>Cancel</button>
                 </div>
                   </div>
                

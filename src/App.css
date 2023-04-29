@@ -57,7 +57,7 @@
   border-radius: 8px;
   color: #FFFFFF;
   margin-left: 5px;
-  text-transform: uppercase;
+  text-transform: capitalize;
   cursor: pointer;
 }
  button:disabled{
@@ -196,6 +196,7 @@ input{
     flex-direction: column;
     padding: 25px;
     opacity: 1;
+    
   }
   
   .modalContainer .title {
@@ -213,9 +214,16 @@ input{
   .btn{
     display: flex;
     justify-content: end;
-  }
+    
+   }
+ 
+  .btnModal-open,.btnModal-close{
+    width: 50px;
+   }
 
-  .btnUpdate{
+   
+
+  .btnUpdate {
     background-color: #47B960;
    
   }
@@ -224,6 +232,22 @@ input{
     background-color: #FFFFFF;
     color: #000000;
     border: 1px solid #777777;
+  }
+
+  .modalContainerDelete{
+    width:30em;
+    border-radius: 12px;
+    background-color: white;
+    box-shadow: rgba(0, 0, 0, 0.2) 0px 5px 15px;
+    display: flex;
+    flex-direction: column;
+    padding: 10px;
+    opacity: 1;
+
+  }
+
+  .btnDelete{
+    background-color: #FF5151;
   }
   
 
