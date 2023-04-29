@@ -43,7 +43,8 @@ const Read = () => {
       await axios.delete(`${url}${id}/`)
         .then(() => {
           getData()
-         closeModal()
+               
+        
         })
    
     }
@@ -70,9 +71,11 @@ const Read = () => {
 
               <button className="btnModal-close" onClick={() => handleDelete(post.id)}><FaTrash /></button>
                <Delete
+             
                message={"Are you sure you want to delete this item?"}
+               onClose={closeModal}
                />
-          
+               
               </div>    
              
              </div>
