@@ -32,6 +32,7 @@ const LoginForm = () => {
                         onChange={(e) => setLogin(e.target.value)}
                     />
                     <button
+                        className="btn-login"
                         disabled={!login}
                     >Enter</button>
                 </form>

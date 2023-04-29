@@ -63,6 +63,7 @@ const Create = () => {
                     ></input>
                 </div>
                 <button
+                    className="btn-create"
                     disabled={!content}
                     onClick={handleSubmitAdd}
                 >Create</button>

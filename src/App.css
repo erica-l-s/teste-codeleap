@@ -49,6 +49,15 @@
   padding: 5px;
 }
 
+.btn-login:hover,
+.btn-create:hover,
+.btnClose:hover,
+.btnUpdate:hover{
+  
+  box-shadow: rgba(0, 0, 0, 0.5) 0px 5px 5px;
+ 
+}
+
  button{
   width: 100px;
   height: 32px;
@@ -60,7 +69,9 @@
   text-transform: capitalize;
   cursor: pointer;
 }
- button:disabled{
+
+
+button:disabled{
   background-color: #777777;
   cursor:not-allowed;
 }
@@ -72,8 +83,6 @@
   overflow: hidden;
   overflow-y: scroll;
   word-break: break-all;
-
- 
 }
 
 .header{
