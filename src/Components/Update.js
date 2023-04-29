@@ -56,10 +56,10 @@ const Update = ({onRequestClose}) => {
                 </div>
                 <div className='btn'>
                 <button
-                className='btnUpdate'
+                className='btn-update'
                 onClick={handleSubmitEdit}
                 >Save</button>
-                <button className='btnClose' onClick={onRequestClose}>Cancel</button>
+                <button className='btn-close' onClick={onRequestClose}>Cancel</button>
                 </div>
                   </div>
                

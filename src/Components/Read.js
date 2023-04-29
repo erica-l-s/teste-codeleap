@@ -67,7 +67,10 @@ const Read = () => {
           return (
             <div key={post.id} className="box">
               <div className="header-create">
-                {post.title}
+                <div className="span">
+                <span >{post.title}</span>
+                </div>
+                
                 <div className="btnModal">
                   {post.username === localStorage.getItem('user') ? <button className="btnModal-open" onClick={() => setData(post)}><FaEdit /></button>  : null} 
                   {openModal && <Update
