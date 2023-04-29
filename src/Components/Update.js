@@ -38,17 +38,17 @@ const Update = ({onRequestClose}) => {
     return (
        
             <form className="modalBackground">
-                <h2>Edit</h2>
-
-                <div className='modalContainer'>
+            <div className='modalContainer'>
+               <h2>Edit Item</h2>
+                    <div className='title'>
                     <p>Title</p>
                     <input
                         value={title}
                         className="input-title"
                         onChange={(e) => setTitle(e.target.value)}
                     ></input>
-                </div>
-                <div>
+                    </div>
+                   <div className='content'>
                     <p>Content</p>
                     <input
                         value={content}
@@ -56,12 +56,17 @@ const Update = ({onRequestClose}) => {
                         onChange={(e) => setContent(e.target.value)}
                     ></input>
                 </div>
-
+                <div className='btn'>
                 <button
-                   onClick={handleSubmitEdit}
-                         
-                >Update</button>
-                <button onClick={()=> navigate('/create')}>Close</button>
+                className='btnUpdate'
+                onClick={handleSubmitEdit}
+                >Save</button>
+                <button className='btnClose' onClick={()=> navigate('/create')}>Cancel</button>
+                </div>
+                  </div>
+               
+
+              
 
 
             </form>

@@ -4,7 +4,6 @@ import { useState, useEffect } from "react";
 import { FaEdit, FaTrash } from "react-icons/fa";
 import Modal from "react-modal";
 import Update from "./Update";
-import { useNavigate } from "react-router-dom";
 
 
 Modal.setAppElement('#root')
@@ -13,15 +12,23 @@ const Read = () => {
  
   const [getItem, setGetItem] = useState([])
   const [openModal, setOpenModal] = useState(false)
-
+  
   const url = "https://dev.codeleap.co.uk/careers/"
- 
+  
   const getData = async () => {
     await axios.get(url)
-      .then((response) => {
-        setGetItem(response.data.results)
-      })
+    .then((response) => {
+      setGetItem(response.data.results)
+    })
   }
+  
+  const isOpenModal = () =>{
+  setOpenModal(true)
+  }
+
+  const closeModal = () =>{
+    setOpenModal(false)
+   }
   
   const setData = (post) =>{
     let {id,title,content} = post
@@ -32,25 +39,18 @@ const Read = () => {
   }
   
   const handleDelete = async (id) => {
-    if (window.confirm("Are you sure you want to delete this item?")) {
       await axios.delete(`${url}${id}/`)
         .then(() => {
           getData()
+         closeModal()
         })
-      }
+   
     }
     
     useEffect(() => {
       getData()
     }, [getItem])
 
-   const isOpenModal = () =>{
-   setOpenModal(true)
-   }
-
-   const closeModal = () =>{
-     setOpenModal(false)
-    }
 
 
 
@@ -66,14 +66,18 @@ const Read = () => {
                 {post.title}
                
                <button className="openModal" onClick={() => setData(post)}><FaEdit/></button>
-
                 {openModal && <Update
                   isOpen = {openModal}
                   onRequestClose = {closeModal}
-                  
-                  />}
+                />}
 
                 <button onClick={() => handleDelete(post.id)}><FaTrash /></button>
+              <div
+               isOpen={openModal}
+               title="Delete Item"
+               description="Are you sure you want to delete this item?"
+               onConfirm= {handleDelete}
+              />
               </div>
               <div className="name-user">
                 <p>@{post.username}</p>
